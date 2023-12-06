@@ -28,7 +28,7 @@ public class GeralPage {
 
         File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         try {
-            java.nio.file.Files.copy(screenshotFile.toPath(), new File("src/test/java/screenshots/screenshot\n" + i + ".png").toPath());
+            java.nio.file.Files.copy(screenshotFile.toPath(), new File("src/test/java/screenshots/screenshot" + i + ".png").toPath());
         } catch (Exception e) {
             e.printStackTrace();
         }

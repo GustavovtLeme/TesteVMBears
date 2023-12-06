@@ -62,6 +62,10 @@ public class addVehiclePage extends GeralPage {
 
             case "Plano":
                 driver.findElement(By.xpath("//button[@id='nextsendquote']")).click();
+                break;
+
+            case "Enviar":
+                driver.findElement(By.xpath("//button[@id='sendemail']")).click();
 
             default:
                 break;

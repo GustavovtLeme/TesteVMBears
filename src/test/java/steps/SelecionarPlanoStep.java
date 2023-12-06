@@ -19,7 +19,6 @@ public class SelecionarPlanoStep extends RunCucumberTest {
         addVehiclePage.preencherCampos();
         addinsurantPage.preencherCamposSeguro();
         addproductDataPage.preencherCamposProduto();
-
     }
 
     @Dado("^valido que estou na aba de planos$")
