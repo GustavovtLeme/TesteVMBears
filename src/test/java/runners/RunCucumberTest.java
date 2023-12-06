@@ -24,10 +24,10 @@ public class RunCucumberTest {
     public static void start(){
     //OBS: Você só pode escolher 1 driver, será necessário comentar o outro para que o sistema funcione
     //Descomente para usar o firefox
-        driver =new FirefoxDriver();
+        //driver =new FirefoxDriver();
     //Descomente para usar o Chrome
-        // driver = new ChromeDriver();
-        //driver.manage().window().maximize();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
     }
 
     @AfterClass

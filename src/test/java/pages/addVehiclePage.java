@@ -2,27 +2,31 @@ package pages;
 
 import org.junit.Assert;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.Select;
 
-import java.io.File;
 
-public class addVehiclePage {
-    
-    public addVehiclePage(WebDriver driver) {
-        this.driver = driver;
-    }
-    WebDriver driver;
 
-    //Campos
+
+public class addVehiclePage extends GeralPage {
+
+    //Mapeamento
     public String dadosVeiculo = "//a[@id='entervehicledata']";
+    public String modelo = "//select[@id='model']";
+    public String cilindrada = "//input[@id='cylindercapacity']";
     public String fabricante = "//select[@id='make']";
     public String potenciaMotor = "//input[@id='engineperformance']";
     public String dataFabricacao = "//input[@id='dateofmanufacture']";
     public String numeroAssentos = "//select[@id='numberofseats']";
+    public String numeroAssentosMoto = "//select[@id='numberofseatsmotorcycle']";
     public String tipocombustivel = "//select[@id='fuel']";
+    public String cargaUtil = "//input[@id='payload']";
+    public String pesoMaximo = "//input[@id='totalweight']";
     public String precoListagem = "//input[@id='listprice']";
     public String milhagemAnual = "//input[@id='annualmileage']";
     public String nextButton = "//button[@id='nextenterinsurantdata']";
+
+    public addVehiclePage(WebDriver driver) {
+        super(driver);
+    }
 
     //Metodos
     public void validaPagina(){
@@ -33,40 +37,39 @@ public class addVehiclePage {
 
     public void preencherCampos(){
         selecionarOpcao(fabricante, "Renault");
-        driver.findElement(By.xpath(potenciaMotor)).sendKeys("37");
-        driver.findElement(By.xpath(dataFabricacao)).sendKeys("10/25/2018");
-        driver.findElement(By.xpath(numeroAssentos)).sendKeys("4");
-        driver.findElement(By.xpath(tipocombustivel)).sendKeys("Gas");
-        driver.findElement(By.xpath(precoListagem)).sendKeys("50000");
-        driver.findElement(By.xpath(milhagemAnual)).sendKeys("10000");
+        preencherCampo(potenciaMotor, "37");
+        preencherCampo(dataFabricacao, "10/25/2018");
+        selecionarOpcao(numeroAssentos, "4");
+        selecionarOpcao(tipocombustivel, "Gas");
+        preencherCampo(precoListagem, "50000");
+        preencherCampo(milhagemAnual, "10000");
     }
 
-    public void clicarNext() throws InterruptedException {
+    public void clicarNext(String info) throws InterruptedException {
         screenshot();
-        driver.findElement(By.xpath(nextButton)).click();
-        Thread.sleep(50000);
-    }
+        switch (info){
+            case "Veiculo":
+                driver.findElement(By.xpath("//button[@id='nextenterinsurantdata']")).click();
+                break;
 
-    public void selecionarOpcao(String xpath, String valor){
-        WebElement dropDown = driver.findElement(By.xpath(xpath));
-        Select seletor = new Select(dropDown);
-        seletor.selectByValue(valor);
-    }
-    public void screenshot(){
+            case "Seguro":
+                driver.findElement(By.xpath("//button[@id='nextenterproductdata']")).click();
+                break;
 
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+            case "Produto":
+                driver.findElement(By.xpath("//button[@id='nextselectpriceoption']")).click();
+                break;
 
-        jsExecutor.executeScript("window.scrollTo(0, 0);");
+            case "Plano":
+                driver.findElement(By.xpath("//button[@id='nextsendquote']")).click();
 
-        Integer i = 1;
-
-        File screenshotFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        try {
-            java.nio.file.Files.copy(screenshotFile.toPath(), new File("src/test/java/screenshots/screenshot" + i + ".png").toPath());
-        } catch (Exception e) {
-            e.printStackTrace();
+            default:
+                break;
         }
-        i++;
+
     }
+
+
+
 
 }

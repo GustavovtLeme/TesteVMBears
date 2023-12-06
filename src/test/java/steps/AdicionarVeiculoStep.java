@@ -11,11 +11,9 @@ public class AdicionarVeiculoStep extends RunCucumberTest {
     GeralPage GeralPage = new GeralPage(driver);
     addVehiclePage addVehiclePage = new addVehiclePage(driver);
 
-
-
     //Passos para adicao de veiculo
     @Dado("^que acesso o site$")
-    public void que_acesso_o_site() {
+    public void que_acesso_o_site() throws InterruptedException {
         GeralPage.acessarSite();
     }
 
@@ -31,6 +29,6 @@ public class AdicionarVeiculoStep extends RunCucumberTest {
 
     @Então("^clico no botao com a informacao Next$")
     public void clico_no_botao_com_a_informacao_Next() throws InterruptedException {
-        addVehiclePage.clicarNext();
+        addVehiclePage.clicarNext("Veiculo");
     }
 }
